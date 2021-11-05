@@ -1,38 +1,117 @@
-.App {
+.main-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grid-3-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-3-3 > input[type='number'] {
   text-align: center;
+  font-size: 1.75em;
+  padding: 0.25em;
+  border: 1px dotted black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.grid-3-3 > input[type='number']:disabled {
+  color: #676;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes border-pulsate {
+  0% {
+    border-color: rgba(255, 0, 0, 1);
+  }
+  50% {
+    border-color: rgba(255, 0, 0, 0);
+  }
+  100% {
+    border-color: rgba(255, 0, 0, 1);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.grid-3-3 > input[type='number'].error {
+  border: 1px solid red;
+  animation: border-pulsate 2s infinite;
 }
 
-.App-link {
-  color: #61dafb;
+.grid-3-3 > input[type='number']::-webkit-inner-spin-button,
+.grid-3-3 > input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.grid-3-3 > input[type='number'].hint {
+  color: #6c6;
+  opacity: 0.6;
+}
+
+.section-0,
+.section-3,
+.section-6,
+.section-1,
+.section-4,
+.section-7 {
+  border-right: 1px solid black;
+}
+
+.section-0,
+.section-1,
+.section-2,
+.section-3,
+.section-4,
+.section-5 {
+  border-bottom: 2px solid black;
+}
+
+@keyframes success-background {
+  0% {
+    background-color: #fff;
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    background-color: #080;
+    opacity: 0.5;
   }
+  100% {
+    background-color: #fff;
+    opacity: 1;
+  }
+}
+
+.main-container.complete {
+  animation: success-background 0.75s ease-in;
+  border: 2px solid #080;
+}
+
+@keyframes success-color {
+  0% {
+    color: #080;
+  }
+  50% {
+    color: #aaa;
+  }
+  100% {
+    color: #080;
+  }
+}
+
+.main-container.complete > .grid-3-3 > input:disabled {
+  animation: success-color 2s infinite;
+}
+
+.main-container.hint-btn-visible {
+  top: calc(50% + 16px);
+}
+
+.main-container > .hint-button {
+  height: 24px;
+  width: 80px;
+  margin-top: 8px;
+  opacity: 0.7;
 }
